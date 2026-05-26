@@ -1,0 +1,61 @@
+2026-05-25 16:09:57,113 [INFO] src.utils - Logging initialized.
+2026-05-25 16:09:57,113 [INFO] __main__ - Initializing ONCONET Experiments Runner...
+2026-05-25 16:09:57,128 [INFO] src.utils - Random seed set to: 42 (reproducibility configurations applied)
+2026-05-25 16:09:57,720 [INFO] __main__ - === Starting Hyperparameter Tuning Sweep ===
+2026-05-25 16:09:57,721 [INFO] __main__ - Tuning Trial - Opt: adamw | LR: 0.001 | BS: 32
+2026-05-25 16:09:57,745 [INFO] src.train - Trainer device configured as: cpu
+2026-05-25 16:09:57,784 [INFO] src.train - Starting training on tune_adamw_lr0.001_bs32 for 2 epochs.
+2026-05-25 16:11:42,904 [INFO] src.utils - Logging initialized.
+2026-05-25 16:11:42,905 [INFO] __main__ - Initializing ONCONET Experiments Runner...
+2026-05-25 16:11:42,921 [INFO] src.utils - Random seed set to: 42 (reproducibility configurations applied)
+2026-05-25 16:11:42,970 [INFO] __main__ - === Starting Hyperparameter Tuning Sweep ===
+2026-05-25 16:11:42,970 [INFO] __main__ - Tuning Trial - Opt: adamw | LR: 0.001 | BS: 32
+2026-05-25 16:11:43,013 [INFO] src.train - Trainer device configured as: cpu
+2026-05-25 16:11:43,021 [INFO] src.train - Starting training on tune_adamw_lr0.001_bs32 for 1 epochs.
+2026-05-25 16:12:29,405 [INFO] src.train - Epoch 01 Summary - Train Loss: 6.1473 | Train Acc: 25.71% | Val Loss: 1.9516 | Val Acc: 25.00% | Val F1: 10.00%
+2026-05-25 16:12:29,499 [INFO] src.train - --> Saved new best model checkpoint with validation loss 1.9516
+2026-05-25 16:12:29,521 [INFO] __main__ - Tuning Trial - Opt: sgd | LR: 0.001 | BS: 32
+2026-05-25 16:12:29,572 [INFO] src.train - Trainer device configured as: cpu
+2026-05-25 16:12:29,590 [INFO] src.train - Starting training on tune_sgd_lr0.001_bs32 for 1 epochs.
+2026-05-25 16:13:15,861 [INFO] src.train - Epoch 01 Summary - Train Loss: 7.5261 | Train Acc: 27.50% | Val Loss: 1.3268 | Val Acc: 50.00% | Val F1: 37.50%
+2026-05-25 16:13:15,875 [INFO] src.train - --> Saved new best model checkpoint with validation loss 1.3268
+2026-05-25 16:13:18,129 [INFO] src.visualization - Hyperparameter comparison plot saved to outputs\plots\hyperparameter_comparison.png
+2026-05-25 16:13:18,129 [INFO] __main__ - === Starting Ablation Study Experiments ===
+2026-05-25 16:13:18,129 [INFO] __main__ - Running Ablation: No BatchNorm
+2026-05-25 16:13:18,265 [INFO] src.train - Trainer device configured as: cpu
+2026-05-25 16:13:18,278 [INFO] src.train - Starting training on ablation_model_a for 1 epochs.
+2026-05-25 16:13:55,701 [INFO] src.train - Epoch 01 Summary - Train Loss: 2.1681 | Train Acc: 26.07% | Val Loss: 1.3114 | Val Acc: 25.00% | Val F1: 10.00%
+2026-05-25 16:13:55,723 [INFO] src.train - --> Saved new best model checkpoint with validation loss 1.3114
+2026-05-25 16:13:55,741 [INFO] __main__ - Running Ablation: Full Architecture
+2026-05-25 16:13:55,787 [INFO] src.train - Trainer device configured as: cpu
+2026-05-25 16:13:55,795 [INFO] src.train - Starting training on ablation_model_d for 1 epochs.
+2026-05-25 16:14:56,331 [INFO] src.train - Epoch 01 Summary - Train Loss: 8.7505 | Train Acc: 24.11% | Val Loss: 1.1008 | Val Acc: 50.00% | Val F1: 37.50%
+2026-05-25 16:14:56,353 [INFO] src.train - --> Saved new best model checkpoint with validation loss 1.1008
+2026-05-25 16:14:57,045 [INFO] src.visualization - Ablation study comparison plot saved to outputs\plots\ablation_comparison.png
+2026-05-25 16:14:57,045 [INFO] __main__ - === Starting Data Augmentation Impact Experiments ===
+2026-05-25 16:14:57,045 [INFO] __main__ - Augmentation Trial - Type: ROTATION
+2026-05-25 16:14:57,101 [INFO] src.train - Trainer device configured as: cpu
+2026-05-25 16:14:57,254 [INFO] src.train - Starting training on aug_rotation for 1 epochs.
+2026-05-25 16:15:42,190 [INFO] src.train - Epoch 01 Summary - Train Loss: 1.6493 | Train Acc: 64.46% | Val Loss: 1.8304 | Val Acc: 50.00% | Val F1: 37.50%
+2026-05-25 16:15:43,142 [INFO] src.train - --> Saved new best model checkpoint with validation loss 1.8304
+2026-05-25 16:15:44,324 [INFO] __main__ - Augmentation Trial - Type: NOISE
+2026-05-25 16:15:45,206 [INFO] src.train - Trainer device configured as: cpu
+2026-05-25 16:15:45,685 [INFO] src.train - Starting training on aug_noise for 1 epochs.
+2026-05-25 16:16:30,281 [INFO] src.train - Epoch 01 Summary - Train Loss: 5.8179 | Train Acc: 28.21% | Val Loss: 2.5095 | Val Acc: 25.00% | Val F1: 10.00%
+2026-05-25 16:16:30,304 [INFO] src.train - --> Saved new best model checkpoint with validation loss 2.5095
+2026-05-25 16:16:30,323 [INFO] __main__ - Augmentation Trial - Type: NONE
+2026-05-25 16:16:30,361 [INFO] src.train - Trainer device configured as: cpu
+2026-05-25 16:16:30,371 [INFO] src.train - Starting training on aug_none for 1 epochs.
+2026-05-25 16:17:14,004 [INFO] src.train - Epoch 01 Summary - Train Loss: 1.7742 | Train Acc: 63.93% | Val Loss: 1.0638 | Val Acc: 50.00% | Val F1: 33.33%
+2026-05-25 16:17:14,214 [INFO] src.train - --> Saved new best model checkpoint with validation loss 1.0638
+2026-05-25 16:17:14,628 [INFO] __main__ - === Starting Transfer Learning Comparison ===
+2026-05-25 16:17:17,494 [INFO] __main__ - Loading baseline custom OncoNetCNN for comparison...
+2026-05-25 16:17:22,434 [INFO] __main__ - Training Transfer Learning model: efficientnet_b0
+2026-05-25 16:17:22,438 [INFO] src.model - Loading transfer learning model: efficientnet_b0 (pretrained=True, fine_tune=False)
+2026-05-25 16:17:30,308 [INFO] src.train - Trainer device configured as: cpu
+2026-05-25 16:17:30,327 [INFO] src.train - Starting training on efficientnet_b0 for 1 epochs.
+2026-05-25 16:18:11,707 [INFO] src.train - Epoch 01 Summary - Train Loss: 0.9338 | Train Acc: 61.07% | Val Loss: 0.3687 | Val Acc: 80.00% | Val F1: 77.52%
+2026-05-25 16:18:11,777 [INFO] src.train - --> Saved new best model checkpoint with validation loss 0.3687
+2026-05-25 16:18:12,130 [INFO] __main__ - Data augmentation study report saved to reports\augmentation_experiment_report.md
+2026-05-25 16:18:12,139 [INFO] src.utils - Research report successfully generated at reports\research_report.md
+2026-05-25 16:18:12,139 [INFO] __main__ - === Comprehensive Experiments Complete. Report compiled under: reports\research_report.md ===

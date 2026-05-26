@@ -1,0 +1,33 @@
+# ONCONET Base Configuration
+
+data:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  split_ratio: [0.7, 0.15, 0.15] # Train, Val, Test split
+  num_workers: 0 # 0 is safest on Windows to avoid multi-processing issues
+  img_size: 224
+
+model:
+  name: "custom" # 'custom' (OncoNetCNN), 'resnet50', 'efficientnet_b0', 'densenet121'
+  num_classes: 4
+  channels: [32, 64, 128, 256]
+  dropout: 0.4
+  use_batch_norm: true
+
+train:
+  epochs: 15
+  batch_size: 32
+  lr: 0.001
+  optimizer: "adamw" # 'adam', 'adamw', 'sgd'
+  weight_decay: 0.01
+  early_stopping_patience: 5
+  scheduler: "plateau" # 'plateau', 'cosine', 'none'
+  mixed_precision: true
+  seed: 42
+  device: "auto" # 'cuda', 'cpu', or 'auto' (detect)
+
+logging:
+  log_dir: "runs"
+  checkpoint_dir: "checkpoints"
+  output_dir: "outputs"
+  report_dir: "reports"

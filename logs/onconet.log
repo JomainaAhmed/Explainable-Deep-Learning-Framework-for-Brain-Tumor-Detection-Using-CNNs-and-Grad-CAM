@@ -1,0 +1,99 @@
+2026-05-25 15:56:49,891 [INFO] src.utils - Logging initialized.
+2026-05-25 15:56:49,892 [INFO] __main__ - Starting ONCONET execution pipeline...
+2026-05-25 15:56:50,072 [INFO] src.utils - Random seed set to: 42 (reproducibility configurations applied)
+2026-05-25 15:56:50,072 [INFO] __main__ - === STAGE 1: Dataset Preparation ===
+2026-05-25 15:56:50,078 [INFO] __main__ - Falling back to generating realistic synthetic Brain MRI slices...
+2026-05-25 15:56:50,078 [INFO] src.dataset - Generating synthetic MRI dataset in data/raw (200 per class)...
+2026-05-25 15:56:55,735 [INFO] src.dataset - Synthetic MRI dataset generation complete.
+2026-05-25 15:56:55,736 [INFO] src.dataset - Splitting raw dataset from data/raw into data/processed with splits (0.7, 0.15, 0.15)...
+2026-05-25 15:57:06,252 [INFO] src.dataset - Dataset split complete.
+2026-05-25 15:57:06,254 [INFO] src.dataset - Generating dataset statistics and distributions...
+2026-05-25 16:00:51,296 [INFO] src.utils - Logging initialized.
+2026-05-25 16:00:51,297 [INFO] __main__ - Starting ONCONET execution pipeline...
+2026-05-25 16:00:51,454 [INFO] src.utils - Random seed set to: 42 (reproducibility configurations applied)
+2026-05-25 16:00:51,454 [INFO] __main__ - === STAGE 1: Dataset Preparation ===
+2026-05-25 16:00:51,455 [INFO] __main__ - Falling back to generating realistic synthetic Brain MRI slices...
+2026-05-25 16:00:51,455 [INFO] src.dataset - Generating synthetic MRI dataset in data/raw (200 per class)...
+2026-05-25 16:01:01,588 [INFO] src.dataset - Synthetic MRI dataset generation complete.
+2026-05-25 16:01:01,588 [INFO] src.dataset - Splitting raw dataset from data/raw into data/processed with splits (0.7, 0.15, 0.15)...
+2026-05-25 16:01:41,481 [INFO] src.dataset - Dataset split complete.
+2026-05-25 16:01:41,481 [INFO] src.dataset - Generating dataset statistics and distributions...
+2026-05-25 16:01:43,292 [INFO] src.dataset - Dataset stats report saved to reports\dataset_statistics.md
+2026-05-25 16:01:43,294 [INFO] __main__ - Dataset preparation stage completed successfully.
+2026-05-25 16:03:02,308 [INFO] src.utils - Logging initialized.
+2026-05-25 16:03:02,308 [INFO] __main__ - Starting ONCONET execution pipeline...
+2026-05-25 16:03:02,330 [INFO] src.utils - Random seed set to: 42 (reproducibility configurations applied)
+2026-05-25 16:03:02,330 [INFO] __main__ - === STAGE 2: Model Training ===
+2026-05-25 16:03:02,473 [INFO] __main__ - 
+==================================================================
+Model Class: OncoNetCNN
+==================================================================
+Layer Name                               Type                 Requires Grad  
+------------------------------------------------------------------
+block1                                   ConvBlock            True           
+block2                                   ConvBlock            True           
+block3                                   ConvBlock            True           
+block4                                   ConvBlock            True           
+gap                                      AdaptiveAvgPool2d    False          
+fc1                                      Linear               True           
+relu                                     ReLU                 False          
+dropout                                  Dropout              False          
+fc2                                      Linear               True           
+------------------------------------------------------------------
+Total Parameters: 422,308
+Trainable Parameters: 422,308
+==================================================================
+2026-05-25 16:03:02,477 [INFO] src.train - Trainer device configured as: cpu
+2026-05-25 16:04:08,621 [INFO] src.utils - Logging initialized.
+2026-05-25 16:04:08,621 [INFO] __main__ - Starting ONCONET execution pipeline...
+2026-05-25 16:04:08,632 [INFO] src.utils - Random seed set to: 42 (reproducibility configurations applied)
+2026-05-25 16:04:08,632 [INFO] __main__ - === STAGE 2: Model Training ===
+2026-05-25 16:04:08,667 [INFO] __main__ - 
+==================================================================
+Model Class: OncoNetCNN
+==================================================================
+Layer Name                               Type                 Requires Grad  
+------------------------------------------------------------------
+block1                                   ConvBlock            True           
+block2                                   ConvBlock            True           
+block3                                   ConvBlock            True           
+block4                                   ConvBlock            True           
+gap                                      AdaptiveAvgPool2d    False          
+fc1                                      Linear               True           
+relu                                     ReLU                 False          
+dropout                                  Dropout              False          
+fc2                                      Linear               True           
+------------------------------------------------------------------
+Total Parameters: 422,308
+Trainable Parameters: 422,308
+==================================================================
+2026-05-25 16:04:08,669 [INFO] src.train - Trainer device configured as: cpu
+2026-05-25 16:04:08,677 [INFO] src.train - Starting training on custom for 3 epochs.
+2026-05-25 16:04:55,045 [INFO] src.train - Epoch 01 Summary - Train Loss: 7.1764 | Train Acc: 25.89% | Val Loss: 1.4661 | Val Acc: 50.00% | Val F1: 33.33%
+2026-05-25 16:04:55,159 [INFO] src.train - --> Saved new best model checkpoint with validation loss 1.4661
+2026-05-25 16:05:33,276 [INFO] src.train - Epoch 02 Summary - Train Loss: 3.0669 | Train Acc: 27.68% | Val Loss: 1.1549 | Val Acc: 50.00% | Val F1: 37.50%
+2026-05-25 16:05:33,293 [INFO] src.train - --> Saved new best model checkpoint with validation loss 1.1549
+2026-05-25 16:06:30,041 [INFO] src.train - Epoch 03 Summary - Train Loss: 2.0273 | Train Acc: 43.75% | Val Loss: 0.7039 | Val Acc: 75.00% | Val F1: 66.67%
+2026-05-25 16:06:30,079 [INFO] src.train - --> Saved new best model checkpoint with validation loss 0.7039
+2026-05-25 16:06:37,855 [INFO] src.visualization - Learning curves saved to outputs\plots\custom_learning_curves.png
+2026-05-25 16:06:37,856 [INFO] __main__ - Training stage completed successfully.
+2026-05-25 16:08:01,321 [INFO] src.utils - Logging initialized.
+2026-05-25 16:08:01,321 [INFO] __main__ - Starting ONCONET execution pipeline...
+2026-05-25 16:08:01,474 [INFO] src.utils - Random seed set to: 42 (reproducibility configurations applied)
+2026-05-25 16:08:01,475 [INFO] __main__ - === STAGE 3: Model Evaluation ===
+2026-05-25 16:08:18,378 [INFO] src.evaluate - Misclassified examples plot saved to outputs\plots\error_analysis.png
+2026-05-25 16:08:19,211 [INFO] src.visualization - Confusion matrix plot saved to outputs\plots\custom_confusion_matrix.png
+2026-05-25 16:08:23,098 [INFO] src.visualization - ROC curves saved to outputs\plots\custom_roc_curve.png
+2026-05-25 16:08:23,545 [INFO] src.visualization - PR curves saved to outputs\plots\custom_pr_curve.png
+2026-05-25 16:08:23,547 [INFO] src.utils - Research report successfully generated at reports\research_report.md
+2026-05-25 16:08:23,547 [INFO] __main__ - Evaluation report compiled and saved to reports\research_report.md
+2026-05-25 16:08:23,547 [INFO] __main__ - === STAGE 4: Explainability Analysis (Grad-CAM) ===
+2026-05-25 16:08:24,824 [INFO] src.visualization - Grad-CAM grid plot saved to outputs\gradcam\custom_gradcam_glioma.png
+2026-05-25 16:08:25,783 [INFO] src.visualization - Grad-CAM grid plot saved to outputs\gradcam\custom_gradcam_meningioma.png
+2026-05-25 16:08:26,648 [INFO] src.visualization - Grad-CAM grid plot saved to outputs\gradcam\custom_gradcam_pituitary.png
+2026-05-25 16:08:27,652 [INFO] src.visualization - Grad-CAM grid plot saved to outputs\gradcam\custom_gradcam_no_tumor.png
+2026-05-25 16:08:27,653 [INFO] __main__ - Grad-CAM explainability plots successfully saved in outputs\gradcam
+2026-05-25 16:08:27,653 [INFO] __main__ - === STAGE 5: Convolution Features Visualization ===
+2026-05-25 16:08:29,203 [INFO] src.visualization - First-layer filter plot saved to outputs\features\custom_first_layer_filters.png
+2026-05-25 16:08:30,053 [INFO] src.visualization - Feature maps plot saved to outputs\features\custom_activation_maps.png
+2026-05-25 16:08:30,055 [INFO] __main__ - Convolutional features visualization complete.
