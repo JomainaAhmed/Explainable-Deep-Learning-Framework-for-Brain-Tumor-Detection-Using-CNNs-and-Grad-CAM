@@ -1,4 +1,4 @@
-# ONCONET: Explainable Deep Learning Framework for Brain Tumor Detection
+# CEREBRONET: Explainable Deep Learning Framework for Brain Tumor Detection
 
 OncoNet is a complete, modular, and publication-ready deep learning framework designed to detect brain tumors from MRI scans with clinical explainability. It implements a custom Convolutional Neural Network (CNN) from scratch in PyTorch, compares performance with modern transfer learning backbones (ResNet, EfficientNet, DenseNet), and integrates a from-scratch Grad-CAM explainability module to visualize model focus areas.
 
