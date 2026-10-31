@@ -1,11 +1,11 @@
 # CEREBRONET: Explainable Deep Learning Framework for Brain Tumor Detection
 
-OncoNet is a complete, modular, and publication-ready deep learning framework designed to detect brain tumors from MRI scans with clinical explainability. It implements a custom Convolutional Neural Network (CNN) from scratch in PyTorch, compares performance with modern transfer learning backbones (ResNet, EfficientNet, DenseNet), and integrates a from-scratch Grad-CAM explainability module to visualize model focus areas.
+CerebroNet is a complete, modular, and publication-ready deep learning framework designed to detect brain tumors from MRI scans with clinical explainability. It implements a custom Convolutional Neural Network (CNN) from scratch in PyTorch, compares performance with modern transfer learning backbones (ResNet, EfficientNet, DenseNet), and integrates a from-scratch Grad-CAM explainability module to visualize model focus areas.
 
 ---
 
 ## 🌟 Key Features
-- **Custom Neural Architecture**: A modular 4-block CNN (`OncoNetCNN`) built in PyTorch, featuring configurable channels, batch normalization, and dropout.
+- **Custom Neural Architecture**: A modular 4-block CNN (`CerebroNetCNN`) built in PyTorch, featuring configurable channels, batch normalization, and dropout.
 - **Deep Explainability**: Custom-built **Grad-CAM** implementation (no third-party Grad-CAM libraries) that intercepts forward feature maps and backward gradient pathways to map model attention to anatomical coordinates.
 - **Transfer Learning Suite**: Integration and comparison wrappers for pre-trained `ResNet50`, `EfficientNet-B0`, and `DenseNet121` backbones.
 - **Automated Experiment Runners**:
@@ -39,7 +39,7 @@ OncoNet/
 │   ├── config.py                  # YAML Configuration parser
 │   ├── dataset.py                 # PyTorch Dataset & Synthetic generator
 │   ├── transforms.py              # Albumentations transforms setup
-│   ├── model.py                   # OncoNetCNN and transfer model architectures
+│   ├── model.py                   # CerebroNetCNN and transfer model architectures
 │   ├── train.py                   # Custom mixed-precision PyTorch trainer
 │   ├── evaluate.py                # Test set evaluator & error analysis
 │   ├── inference.py               # Single scan inference & Grad-CAM visualizer CLI
@@ -86,7 +86,7 @@ python main.py --prepare --synthetic --num_samples 200
 *Note: To download the public dataset from the web directly, run without the `--synthetic` flag.*
 
 ### 2. Model Training
-Train the custom `OncoNetCNN` model with default parameters (mixed-precision enabled on CUDA, early stopping enabled):
+Train the custom `CerebroNetCNN` model with default parameters (mixed-precision enabled on CUDA, early stopping enabled):
 ```bash
 python main.py --train --model custom --epochs 15
 ```
