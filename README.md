@@ -20,7 +20,7 @@ CerebroNet is a complete, modular, and publication-ready deep learning framework
 ## 📂 Repository Structure
 
 ```
-OncoNet/
+CerebroNet/
 ├── configs/
 │   ├── base_config.yaml           # Primary training/model settings
 │   └── tuning_config.yaml         # Config for HP tuning, augmentations, and ablations
@@ -58,8 +58,8 @@ OncoNet/
 
 1. **Clone and Navigate**:
    ```bash
-   git clone https://github.com/yourusername/OncoNet.git
-   cd OncoNet
+   git clone https://github.com/yourusername/CerebroNet.git
+   cd CerebroNet
    ```
 
 2. **Set up Virtual Environment**:
@@ -132,6 +132,6 @@ ONCONET does not use third-party libraries for Grad-CAM. It registers PyTorch ho
 
 ## 📈 Research Summary Preview
 When running evaluations, the framework outputs classification logs. The automatic markdown report compiled in `reports/research_report.md` documents:
-- Performance comparisons between `OncoNetCNN` and `EfficientNet-B0`/`ResNet50`.
+- Performance comparisons between `CerebroNetCNN` and `EfficientNet-B0`/`ResNet50`.
 - The regularizing effect of Batch Normalization and Dropout layers in MRI classification.
 - Detailed anatomical localization heatmaps showing exact coordinate targets for meningiomas, gliomas, and pituitary tumors.
