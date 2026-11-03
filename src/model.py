@@ -2,7 +2,7 @@ import logging
 import torch
 import torch.nn as nn
 import torchvision.models as models
-from typing import List, Tuple, Union, Dict, Any
+from typing import List, Tuple, Union, Dict, Any, Optional
 
 logger = logging.getLogger(__name__)
 
@@ -23,14 +23,20 @@ class ConvBlock(nn.Module):
         return self.block(x)
 
 
-class OncoNetCNN(nn.Module):
-    """Custom CNN architecture designed from scratch for brain tumor classification."""
+class CerebroNetCNN(nn.Module):
+    """Custom 4-block CNN architecture designed from scratch for brain tumor MRI classification.
+    
+    Features modular channel growth, optional batch normalization, global average pooling,
+    and dropout regularization for clinical explainability.
+    """
     def __init__(
         self, 
         num_classes: int = 4, 
         channels: List[int] = [32, 64, 128, 256],
         dropout_rate: float = 0.4,
-        use_batch_norm: bool = True
+        use_batch_norm: bool = True,
+        dropout: Optional[float] = None,
+        **kwargs
     ):
         """
         Args:
@@ -40,7 +46,9 @@ class OncoNetCNN(nn.Module):
             use_batch_norm: Whether to include Batch Normalization in the conv blocks.
         """
         super().__init__()
-        assert len(channels) == 4, "OncoNetCNN requires exactly 4 channel configurations for its 4 blocks."
+        if dropout is not None:
+            dropout_rate = dropout
+        assert len(channels) == 4, "CerebroNetCNN requires exactly 4 channel configurations for its 4 blocks."
         
         # 4 Convolutional Blocks
         self.block1 = ConvBlock(3, channels[0], use_batch_norm=use_batch_norm)
@@ -94,6 +102,10 @@ class OncoNetCNN(nn.Module):
         return x
 
 
+# Alias for backward compatibility with previous scripts/logs
+OncoNetCNN = CerebroNetCNN
+
+
 def get_transfer_model(
     model_name: str, 
     num_classes: int = 4, 
@@ -115,7 +127,8 @@ def get_transfer_model(
     """
     logger.info(f"Loading transfer learning model: {model_name} (pretrained={pretrained}, fine_tune={fine_tune})")
     
-    if model_name == "resnet50":
+    m_name = model_name.lower()
+    if m_name == "resnet50":
         weights = models.ResNet50_Weights.DEFAULT if pretrained else None
         model = models.resnet50(weights=weights)
         
@@ -135,7 +148,7 @@ def get_transfer_model(
         for param in model.fc.parameters():
             param.requires_grad = True
             
-    elif model_name == "efficientnet_b0":
+    elif m_name == "efficientnet_b0":
         weights = models.EfficientNet_B0_Weights.DEFAULT if pretrained else None
         model = models.efficientnet_b0(weights=weights)
         
@@ -153,7 +166,7 @@ def get_transfer_model(
         for param in model.classifier.parameters():
             param.requires_grad = True
             
-    elif model_name == "densenet121":
+    elif m_name == "densenet121":
         weights = models.DenseNet121_Weights.DEFAULT if pretrained else None
         model = models.densenet121(weights=weights)
         

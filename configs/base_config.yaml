@@ -1,4 +1,4 @@
-# ONCONET Base Configuration
+# CEREBRONET Base Configuration
 
 data:
   raw_dir: "data/raw"
@@ -8,7 +8,7 @@ data:
   img_size: 224
 
 model:
-  name: "custom" # 'custom' (OncoNetCNN), 'resnet50', 'efficientnet_b0', 'densenet121'
+  name: "custom" # 'custom' (CerebroNetCNN), 'resnet50', 'efficientnet_b0', 'densenet121'
   num_classes: 4
   channels: [32, 64, 128, 256]
   dropout: 0.4

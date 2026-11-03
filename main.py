@@ -16,7 +16,7 @@ from src.dataset import (
     generate_dataset_statistics
 )
 from src.transforms import get_train_transforms, get_val_test_transforms
-from src.model import OncoNetCNN, get_transfer_model, get_model_summary_string
+from src.model import CerebroNetCNN, OncoNetCNN, get_transfer_model, get_model_summary_string
 from src.train import Trainer
 from src.evaluate import evaluate_model
 from src.gradcam import GradCAM, overlay_heatmap, get_last_conv_layer
@@ -33,7 +33,7 @@ from src.visualization import (
 logger = logging.getLogger(__name__)
 
 def main():
-    parser = argparse.ArgumentParser(description="ONCONET Brain Tumor Classification Framework")
+    parser = argparse.ArgumentParser(description="CEREBRONET Brain Tumor Classification Framework")
     
     # Mode selection
     parser.add_argument("--config", type=str, default="configs/base_config.yaml", help="Path to config YAML file")
@@ -56,8 +56,8 @@ def main():
     args = parser.parse_args()
     
     # Setup logger
-    setup_logging(log_dir="logs", log_name="onconet.log")
-    logger.info("Starting ONCONET execution pipeline...")
+    setup_logging(log_dir="logs", log_name="cerebronet.log")
+    logger.info("Starting CEREBRONET execution pipeline...")
     
     # Load configuration
     config = load_config(args.config)
@@ -135,7 +135,7 @@ def main():
         
         # Instantiate Model
         if model_name == "custom":
-            model = OncoNetCNN(
+            model = CerebroNetCNN(
                 num_classes=config.model.num_classes,
                 channels=config.model.channels,
                 dropout_rate=config.model.dropout,
@@ -193,7 +193,7 @@ def main():
         
         # Load weights
         if model_name == "custom":
-            model = OncoNetCNN(
+            model = CerebroNetCNN(
                 num_classes=config.model.num_classes,
                 channels=config.model.channels,
                 dropout_rate=config.model.dropout,
@@ -257,7 +257,7 @@ def main():
         
         # Load weights
         if model_name == "custom":
-            model = OncoNetCNN(
+            model = CerebroNetCNN(
                 num_classes=config.model.num_classes,
                 channels=config.model.channels,
                 dropout_rate=config.model.dropout,
@@ -321,7 +321,7 @@ def main():
         
         # Load weights
         if model_name == "custom":
-            model = OncoNetCNN(
+            model = CerebroNetCNN(
                 num_classes=config.model.num_classes,
                 channels=config.model.channels,
                 dropout_rate=config.model.dropout,

@@ -121,7 +121,7 @@ python run_experiments.py --epochs 3 --quick_run
 ---
 
 ## 🧠 Explainability: How Custom Grad-CAM Works
-ONCONET does not use third-party libraries for Grad-CAM. It registers PyTorch hooks directly:
+CerebroNet does not use third-party libraries for Grad-CAM. It registers PyTorch hooks directly:
 1. **Forward Hook**: Captures the final feature map activation tensor $A$ of the target convolutional layer (e.g. Block 4's Conv2d layer).
 2. **Backward Hook**: Intercepts the backpropagated gradient tensor $G = \frac{\partial Y^c}{\partial A}$ representing the importance of each feature map activation pixel for the predicted category $c$.
 3. **Weight Pool**: Averages the gradients over spatial dimensions to get channel importance weights $\alpha_c^k$.

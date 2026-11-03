@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 from typing import Tuple, List, Dict, Optional, Any
 from torch.utils.data import Dataset
+from src.utils import dataframe_to_markdown
 
 logger = logging.getLogger(__name__)
 
@@ -297,13 +298,13 @@ def generate_dataset_statistics(processed_dir: str, output_report_path: str) -> 
     # Create Markdown report
     os.makedirs(os.path.dirname(output_report_path), exist_ok=True)
     with open(output_report_path, "w", encoding="utf-8") as f:
-        f.write("# ONCONET Dataset Statistics Report\n\n")
+        f.write("# CEREBRONET Dataset Statistics Report\n\n")
         f.write("This report summarizes the distribution and statistics of the brain tumor MRI scans.\n\n")
         
         f.write("## Class Distribution Table\n\n")
         pivot_df = df.pivot(index="Class", columns="Split", values="Count")
         pivot_df["Total"] = pivot_df.sum(axis=1)
-        f.write(pivot_df.to_markdown())
+        f.write(dataframe_to_markdown(pivot_df))
         f.write("\n\n")
         
         f.write("## Data Summary Details\n\n")

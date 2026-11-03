@@ -7,7 +7,7 @@ import numpy as np
 from typing import Dict, Any, Tuple
 
 from src.config import load_config
-from src.model import OncoNetCNN, get_transfer_model, get_model_summary_string
+from src.model import CerebroNetCNN, OncoNetCNN, get_transfer_model, get_model_summary_string
 from src.transforms import get_val_test_transforms
 from src.gradcam import GradCAM, overlay_heatmap, get_last_conv_layer
 from src.dataset import CLASSES
@@ -23,7 +23,7 @@ def load_inference_model(
     logger.info(f"Loading model '{model_name}' for inference from {checkpoint_path}...")
     
     if model_name == "custom":
-        model = OncoNetCNN(num_classes=len(CLASSES))
+        model = CerebroNetCNN(num_classes=len(CLASSES))
     else:
         model = get_transfer_model(model_name, num_classes=len(CLASSES), pretrained=False)
         
@@ -138,7 +138,7 @@ def run_inference_with_gradcam(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="ONCONET Inference CLI")
+    parser = argparse.ArgumentParser(description="CEREBRONET Inference CLI")
     parser.add_argument("--image", type=str, required=True, help="Path to input MRI image file")
     parser.add_argument("--model", type=str, default="custom", choices=["custom", "resnet50", "efficientnet_b0", "densenet121"], help="Model type")
     parser.add_argument("--checkpoint", type=str, required=True, help="Path to trained checkpoint (.pth)")

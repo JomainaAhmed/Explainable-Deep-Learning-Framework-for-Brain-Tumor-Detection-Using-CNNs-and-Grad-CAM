@@ -7,10 +7,10 @@ import pandas as pd
 from torch.utils.data import DataLoader
 
 from src.config import load_config, ConfigNode
-from src.utils import set_seed, setup_logging, generate_research_report
+from src.utils import set_seed, setup_logging, generate_research_report, dataframe_to_markdown
 from src.dataset import BrainMRIDataset, CLASSES
 from src.transforms import get_train_transforms, get_val_test_transforms, get_experiment_transforms
-from src.model import OncoNetCNN, get_transfer_model, count_parameters, count_trainable_parameters
+from src.model import CerebroNetCNN, OncoNetCNN, get_transfer_model, count_parameters, count_trainable_parameters
 from src.train import Trainer
 from src.evaluate import evaluate_model
 from src.visualization import (
@@ -55,7 +55,7 @@ def run_tuning_grid(config, args, train_dataset, val_dataset) -> list:
                 val_loader = DataLoader(val_dataset, batch_size=bs, shuffle=False, num_workers=0)
                 
                 # Initialize model
-                model = OncoNetCNN(
+                model = CerebroNetCNN(
                     num_classes=trial_config.model.num_classes,
                     channels=trial_config.model.channels,
                     dropout_rate=trial_config.model.dropout,
@@ -127,7 +127,7 @@ def run_ablation_study(config, args, processed_dir) -> dict:
         ab_config.train.epochs = args.epochs
         
         # Initialize model
-        model = OncoNetCNN(
+        model = CerebroNetCNN(
             num_classes=config.model.num_classes,
             channels=config.model.channels,
             dropout_rate=settings["dropout"],
@@ -191,7 +191,7 @@ def run_data_augmentation_experiment(config, args, processed_dir) -> list:
         trial_config = ConfigNode(config.to_dict())
         trial_config.train.epochs = args.epochs
         
-        model = OncoNetCNN(
+        model = CerebroNetCNN(
             num_classes=config.model.num_classes,
             channels=config.model.channels,
             dropout_rate=config.model.dropout,
@@ -242,8 +242,8 @@ def run_transfer_learning_comparison(config, args, processed_dir, device) -> dic
     results = {}
     
     # 1. Custom model baseline evaluation first
-    logger.info("Loading baseline custom OncoNetCNN for comparison...")
-    custom_model = OncoNetCNN(
+    logger.info("Loading baseline custom CerebroNetCNN for comparison...")
+    custom_model = CerebroNetCNN(
         num_classes=config.model.num_classes,
         channels=config.model.channels,
         dropout_rate=config.model.dropout,
@@ -255,14 +255,14 @@ def run_transfer_learning_comparison(config, args, processed_dir, device) -> dic
         chk = torch.load(custom_best_path, map_location=device)
         custom_model.load_state_dict(chk["model_state_dict"])
         metrics, _ = evaluate_model(custom_model, test_loader, device, output_dir=None)
-        results["OncoNetCNN (Custom)"] = {
+        results["CerebroNetCNN (Custom)"] = {
             "test_accuracy": metrics["accuracy"],
             "test_f1": metrics["f1"],
             "total_params": count_parameters(custom_model),
             "trainable_params": count_trainable_parameters(custom_model)
         }
     else:
-        results["OncoNetCNN (Custom)"] = {
+        results["CerebroNetCNN (Custom)"] = {
             "test_accuracy": 0.85, # representative fallback metrics
             "test_f1": 0.84,
             "total_params": count_parameters(custom_model),
@@ -302,7 +302,7 @@ def run_transfer_learning_comparison(config, args, processed_dir, device) -> dic
 
 
 def main():
-    parser = argparse.ArgumentParser(description="ONCONET Automated Experiments Pipeline")
+    parser = argparse.ArgumentParser(description="CEREBRONET Automated Experiments Pipeline")
     parser.add_argument("--config", type=str, default="configs/base_config.yaml", help="Path to base config YAML")
     parser.add_argument("--epochs", type=int, default=3, help="Number of training epochs per trial")
     parser.add_argument("--quick_run", action="store_true", help="Minimize trials to complete execution rapidly")
@@ -311,7 +311,7 @@ def main():
     args = parser.parse_args()
     
     setup_logging(log_dir="logs", log_name="experiments.log")
-    logger.info("Initializing ONCONET Experiments Runner...")
+    logger.info("Initializing CEREBRONET Experiments Runner...")
     
     config = load_config(args.config)
     set_seed(config.train.seed)
@@ -348,11 +348,11 @@ def main():
     aug_report_path = os.path.join(config.logging.report_dir, "augmentation_experiment_report.md")
     os.makedirs(os.path.dirname(aug_report_path), exist_ok=True)
     with open(aug_report_path, "w", encoding="utf-8") as f:
-        f.write("# ONCONET Data Augmentation Impact Analysis\n\n")
+        f.write("# CEREBRONET Data Augmentation Impact Analysis\n\n")
         f.write("This study evaluates the direct contribution of individual image augmentation transforms ")
-        f.write("on classification performance of the custom OncoNetCNN architecture.\n\n")
+        f.write("on classification performance of the custom CerebroNetCNN architecture.\n\n")
         f.write("### Experiment Results Table:\n\n")
-        f.write(aug_df.to_markdown(index=False))
+        f.write(dataframe_to_markdown(aug_df, index=False))
         f.write("\n\n")
         f.write("### Key Observations:\n")
         f.write("- **Rotations and Flips**: Help the network learn orientation invariance since tumor location shape orientation differs.\n")

@@ -1,5 +1,5 @@
 """
-ONCONET Configuration Module.
+CEREBRONET Configuration Module.
 Handles loading and parsing of project YAML configuration files.
 """
 

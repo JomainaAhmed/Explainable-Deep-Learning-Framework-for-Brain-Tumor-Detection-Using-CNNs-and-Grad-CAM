@@ -1,4 +1,4 @@
-# ONCONET Hyperparameter Tuning and Ablation Experiment Configuration
+# CEREBRONET Hyperparameter Tuning and Ablation Experiment Configuration
 
 hyperparameters:
   learning_rates: [0.1, 0.01, 0.001, 0.0001]

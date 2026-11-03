@@ -211,7 +211,7 @@ def plot_feature_maps(model: nn.Module, input_tensor: torch.Tensor, save_path: s
     device = next(model.parameters()).device
     input_tensor = input_tensor.to(device)
     
-    # Extract features using OncoNetCNN blocks (checks model class name)
+    # Extract features using CerebroNetCNN blocks (checks model class name)
     try:
         with torch.no_grad():
             if hasattr(model, "block1"):

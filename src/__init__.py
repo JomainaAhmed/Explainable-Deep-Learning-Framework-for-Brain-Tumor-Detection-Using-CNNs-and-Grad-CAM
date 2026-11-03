@@ -1,1 +1,1 @@
-# ONCONET package initialization
+# CEREBRONET package initialization

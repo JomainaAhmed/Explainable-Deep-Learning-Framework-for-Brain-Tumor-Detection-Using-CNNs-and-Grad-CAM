@@ -1,6 +1,6 @@
-# ONCONET Data Augmentation Impact Analysis
+# CEREBRONET Data Augmentation Impact Analysis
 
-This study evaluates the direct contribution of individual image augmentation transforms on classification performance of the custom OncoNetCNN architecture.
+This study evaluates the direct contribution of individual image augmentation transforms on classification performance of the custom CerebroNetCNN architecture.
 
 ### Experiment Results Table:
 

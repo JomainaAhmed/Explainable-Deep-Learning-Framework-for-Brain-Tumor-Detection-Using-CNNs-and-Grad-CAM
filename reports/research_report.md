@@ -1,8 +1,8 @@
-# ONCONET: Explainable Deep Learning Framework for Brain Tumor Detection
+# CEREBRONET: Explainable Deep Learning Framework for Brain Tumor Detection
 ### Research & Evaluation Summary Report
 
 ## 1. Dataset Overview
-The ONCONET framework utilizes a 4-class T1-weighted contrast-enhanced Brain MRI dataset. The classes consist of two intra-axial brain tumors (**glioma**, **pituitary**), one extra-axial tumor (**meningioma**), and healthy brain scans (**no tumor**).
+The CEREBRONET framework utilizes a 4-class T1-weighted contrast-enhanced Brain MRI dataset. The classes consist of two intra-axial brain tumors (**glioma**, **pituitary**), one extra-axial tumor (**meningioma**), and healthy brain scans (**no tumor**).
 
 ### Splitting Strategy:
 - **Train Set**: 70%
@@ -10,10 +10,10 @@ The ONCONET framework utilizes a 4-class T1-weighted contrast-enhanced Brain MRI
 - **Test Set**: 15%
 
 ## 2. Problem Statement
-Accurate diagnosis of brain tumors from MRI scans requires specialist radiologists and is time-consuming. Deep learning models demonstrate high accuracy, but their 'black box' nature limits clinical adoption. ONCONET addresses this by developing a lightweight, custom CNN architecture paired with a customized Grad-CAM visualization module to map deep neural attention directly to pathological sites, providing interpretable diagnosis predictions.
+Accurate diagnosis of brain tumors from MRI scans requires specialist radiologists and is time-consuming. Deep learning models demonstrate high accuracy, but their 'black box' nature limits clinical adoption. CEREBRONET addresses this by developing a lightweight, custom CNN architecture paired with a customized Grad-CAM visualization module to map deep neural attention directly to pathological sites, providing interpretable diagnosis predictions.
 
 ## 3. Model Architecture
-The custom **OncoNetCNN** architecture consists of 4 sequential convolutional blocks designed to capture increasingly abstract visual features, followed by global pooling and dense layers:
+The custom **CerebroNetCNN** architecture consists of 4 sequential convolutional blocks designed to capture increasingly abstract visual features, followed by global pooling and dense layers:
 
 ```
 Input (224x224x3) 
@@ -35,7 +35,7 @@ Input (224x224x3)
 - **Mixed Precision**: Autocast FP16/FP32 for accelerated compute
 
 ## 5. Main Model Evaluation Metrics
-Below are the metrics achieved on the test dataset split by the custom **OncoNetCNN** model:
+Below are the metrics achieved on the test dataset split by the custom **CerebroNetCNN** model:
 
 - **Test Accuracy**: 88.00%
 - **Macro Precision**: 88.00%
@@ -60,7 +60,7 @@ A hyperparameter sweep was executed across learning rates, batch sizes, and opti
 | 2 | adamw | 0.001 | 32 | 25.00% | 1.9516 |
 
 ## 7. Ablation Study Results
-Architectural variations of OncoNetCNN were trained to assess the impact of key regularizers and data augmentation:
+Architectural variations of CerebroNetCNN were trained to assess the impact of key regularizers and data augmentation:
 
 | Model Variant | Validation Accuracy | Validation F1 Score | Validation Loss |
 | :--- | :---: | :---: | :---: |
@@ -74,11 +74,11 @@ Architectural variations of OncoNetCNN were trained to assess the impact of key 
 - **Full Architecture**: Achieves the most robust balance, matching high generalization scores with lower loss.
 
 ## 8. Transfer Learning Comparison
-Comparison of the custom OncoNetCNN against ImageNet pre-trained architectures:
+Comparison of the custom CerebroNetCNN against ImageNet pre-trained architectures:
 
 | Model Architecture | Test Accuracy | Test F1 Score | Total Parameters | Trainable Parameters |
 | :--- | :---: | :---: | :---: | :---: |
-| OncoNetCNN (Custom) | 75.0% | 66.7% | 422,308 | 422,308 |
+| CerebroNetCNN (Custom) | 75.0% | 66.7% | 422,308 | 422,308 |
 | efficientnet_b0 | 80.0% | 77.5% | 4,172,032 | 164,484 |
 
 ## 9. Explainability Results (Grad-CAM)

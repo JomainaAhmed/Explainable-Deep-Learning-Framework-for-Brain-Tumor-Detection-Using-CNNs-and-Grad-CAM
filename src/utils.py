@@ -24,7 +24,7 @@ def set_seed(seed: int = 42) -> None:
     logger.info(f"Random seed set to: {seed} (reproducibility configurations applied)")
 
 
-def setup_logging(log_dir: str = "logs", log_name: str = "onconet.log") -> None:
+def setup_logging(log_dir: str = "logs", log_name: str = "cerebronet.log") -> None:
     """Configures the root logging settings to output to both console and file.
 
     Args:
@@ -46,6 +46,25 @@ def setup_logging(log_dir: str = "logs", log_name: str = "onconet.log") -> None:
     logger.info("Logging initialized.")
 
 
+def dataframe_to_markdown(df: Any, index: bool = True) -> str:
+    """Converts a pandas DataFrame to a markdown table, with fallback if tabulate is not installed."""
+    try:
+        return df.to_markdown(index=index)
+    except Exception:
+        if index:
+            df_reset = df.reset_index()
+        else:
+            df_reset = df.copy()
+        headers = [str(c) for c in df_reset.columns]
+        lines = [
+            "| " + " | ".join(headers) + " |",
+            "| " + " | ".join([":---:"] * len(headers)) + " |"
+        ]
+        for _, row in df_reset.iterrows():
+            lines.append("| " + " | ".join(str(val) for val in row) + " |")
+        return "\n".join(lines)
+
+
 def generate_research_report(
     output_path: str,
     dataset_stats: Dict[str, Any],
@@ -54,7 +73,7 @@ def generate_research_report(
     ablation_results: Optional[Dict[str, Any]] = None,
     transfer_results: Optional[Dict[str, Any]] = None
 ) -> None:
-    """Generates a publication-quality research report summarizing the ONCONET framework findings.
+    """Generates a publication-quality research report summarizing the CEREBRONET framework findings.
 
     Args:
         output_path: Target path to write the markdown report (reports/research_report.md).
@@ -67,12 +86,12 @@ def generate_research_report(
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     
     with open(output_path, "w", encoding="utf-8") as f:
-        f.write("# ONCONET: Explainable Deep Learning Framework for Brain Tumor Detection\n")
+        f.write("# CEREBRONET: Explainable Deep Learning Framework for Brain Tumor Detection\n")
         f.write("### Research & Evaluation Summary Report\n\n")
         
         # 1. Dataset Overview
         f.write("## 1. Dataset Overview\n")
-        f.write("The ONCONET framework utilizes a 4-class T1-weighted contrast-enhanced Brain MRI dataset. ")
+        f.write("The CEREBRONET framework utilizes a 4-class T1-weighted contrast-enhanced Brain MRI dataset. ")
         f.write("The classes consist of two intra-axial brain tumors (**glioma**, **pituitary**), ")
         f.write("one extra-axial tumor (**meningioma**), and healthy brain scans (**no tumor**).\n\n")
         
@@ -85,13 +104,13 @@ def generate_research_report(
         f.write("## 2. Problem Statement\n")
         f.write("Accurate diagnosis of brain tumors from MRI scans requires specialist radiologists and is time-consuming. ")
         f.write("Deep learning models demonstrate high accuracy, but their 'black box' nature limits clinical adoption. ")
-        f.write("ONCONET addresses this by developing a lightweight, custom CNN architecture paired with a customized ")
+        f.write("CEREBRONET addresses this by developing a lightweight, custom CNN architecture paired with a customized ")
         f.write("Grad-CAM visualization module to map deep neural attention directly to pathological sites, ")
         f.write("providing interpretable diagnosis predictions.\n\n")
         
         # 3. Model Architecture
         f.write("## 3. Model Architecture\n")
-        f.write("The custom **OncoNetCNN** architecture consists of 4 sequential convolutional blocks ")
+        f.write("The custom **CerebroNetCNN** architecture consists of 4 sequential convolutional blocks ")
         f.write("designed to capture increasingly abstract visual features, followed by global pooling and dense layers:\n\n")
         f.write("```\n")
         f.write("Input (224x224x3) \n")
@@ -115,7 +134,7 @@ def generate_research_report(
         
         # 5. Evaluation Metrics
         f.write("## 5. Main Model Evaluation Metrics\n")
-        f.write("Below are the metrics achieved on the test dataset split by the custom **OncoNetCNN** model:\n\n")
+        f.write("Below are the metrics achieved on the test dataset split by the custom **CerebroNetCNN** model:\n\n")
         f.write(f"- **Test Accuracy**: {eval_metrics.get('accuracy', 0.0) * 100:.2f}%\n")
         f.write(f"- **Macro Precision**: {eval_metrics.get('precision', 0.0) * 100:.2f}%\n")
         f.write(f"- **Macro Recall**: {eval_metrics.get('recall', 0.0) * 100:.2f}%\n")
@@ -144,7 +163,7 @@ def generate_research_report(
         # 7. Ablation Results
         if ablation_results:
             f.write("## 7. Ablation Study Results\n")
-            f.write("Architectural variations of OncoNetCNN were trained to assess the impact of key regularizers and data augmentation:\n\n")
+            f.write("Architectural variations of CerebroNetCNN were trained to assess the impact of key regularizers and data augmentation:\n\n")
             f.write("| Model Variant | Validation Accuracy | Validation F1 Score | Validation Loss |\n")
             f.write("| :--- | :---: | :---: | :---: |\n")
             for model_key, res in ablation_results.items():
@@ -159,7 +178,7 @@ def generate_research_report(
         # 8. Transfer Learning Comparison
         if transfer_results:
             f.write("## 8. Transfer Learning Comparison\n")
-            f.write("Comparison of the custom OncoNetCNN against ImageNet pre-trained architectures:\n\n")
+            f.write("Comparison of the custom CerebroNetCNN against ImageNet pre-trained architectures:\n\n")
             f.write("| Model Architecture | Test Accuracy | Test F1 Score | Total Parameters | Trainable Parameters |\n")
             f.write("| :--- | :---: | :---: | :---: | :---: |\n")
             for m_name, res in transfer_results.items():

@@ -166,21 +166,22 @@ def get_last_conv_layer(model_name: str, model: nn.Module) -> nn.Module:
         model_name: Name of model ('custom', 'resnet50', 'efficientnet_b0', 'densenet121').
         model: PyTorch model object.
     """
-    if model_name == "custom":
-        # OncoNetCNN: target layer is the convolutional layer inside Block 4
+    m_name = model_name.lower()
+    if m_name in ["custom", "cerebronet", "cerebronetcnn", "onconet", "onconetcnn"]:
+        # CerebroNetCNN: target layer is the convolutional layer inside Block 4
         # self.block4 is a ConvBlock which contains a Sequential: Conv2d -> BatchNorm2d -> ReLU -> MaxPool2d
         return model.block4.block[0]
         
-    elif model_name == "resnet50":
+    elif m_name == "resnet50":
         # ResNet50: target is the third conv layer of the last bottleneck in layer 4
         return model.layer4[-1].conv3
         
-    elif model_name == "efficientnet_b0":
+    elif m_name == "efficientnet_b0":
         # EfficientNet-B0: target is the convolutional layer in the final features block (features[8])
         # features[8] is a Conv2dNormActivation: Conv2d -> BatchNorm2d -> SiLU
         return model.features[8][0]
         
-    elif model_name == "densenet121":
+    elif m_name == "densenet121":
         # DenseNet121: target is the final conv layer of the final dense block
         # features.denseblock4 is a Sequential, denselayer16 is the last layer, which has conv2
         return model.features.denseblock4.denselayer16.conv2
